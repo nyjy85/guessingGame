@@ -8,13 +8,19 @@
   <head>
     <link rel="stylesheet" href="gg.css">
     <title>Guessing Game</title>
-    <p>Guess correctly and win
+    <p>Guess correctly and win a lifetime supply of habanero peppers. You have 5 attempts.</p>
   </head>
   <body>
     <h1>Guessing Game</h1>
     <input type="text" placeholder="Enter your guess">
-    <input type="Submit" value"Submit">
-    <div id="output"></div>
-  <!--<script type="gg.js"></script>-->
+    <button type="button" id="submit">Submit</button>
+    <button type="button" id="gimme">Gimme answer</button>
+    <div class="feedback"><p class="feedback"></p></div>
+    <div class="count"><p id="count"></p></div>
+    <button type="button" id="again">Play again</button>
+
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="gg.js"></script>
   </body>
 </html>
