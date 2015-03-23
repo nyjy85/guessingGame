@@ -1,167 +1,87 @@
+var feedback = $('p.feedback');
+var turn = $('p#count');
+
 $(document).ready(function() { 
-
- 	var answer = Math.round(Math.random() * 100);	
- 	var guess = [];
- 	var count = 1;
-
- 	
- 	var feedback = $('p.feedback');
- 	var gameOver = "Game over. You lose";
- 	var noRepeats = "DRY Bitch DRY";
- 	var won = "Congrats, you fucking won!!";
- 	var turn = $('p#count');
-
-
- 	function play(userInput){ // this will be an onclick event
- 		if (count === 5) return feedback.text(gameOver);
- 		guess.push(parseInt(userInput));
- 		var lastNum = guess[guess.length-1];
- 		if (isRepeat(lastNum)) {
- 			feedback.text(noRepeats);
- 			count = count;
- 			$('input:text').val('');
- 		} else {
- 			compare(lastNum);
- 		}
- 	};
-
- 	function compare(lastNum){
- 		turn.text(count++);
- 		if (lastNum === answer) return feedback.text(won);
- 		if (lastNum < answer) {
- 			var higher = difference(lastNum, answer) + ", guess higher";
- 			feedback.text(higher);
- 		}
- 		if (lastNum > answer) {
- 			var lower = difference(lastNum, answer) + ", guess lower";
- 			feedback.text(lower);
- 		}
- 		$('input:text').val('');
- 	};
-
- 	function difference(lastNum, answer){
- 		if (Math.abs(answer - lastNum) <= 5) return "You are  a ghost pepper, deathly HOT";
- 		if (Math.abs(answer - lastNum) <= 10) return "You are a habanero pepper, on the verge of tears";
- 		if (Math.abs(answer - lastNum) <= 20) return "You are a Jalapeno pepper, very spicy but tolerable";
- 		if (Math.abs(answer - lastNum) <= 30) return "You are a peperoncini, a small kick";
- 		else return "You are as cold and mild as a green bell pepper";
- 	};
-
- 	function isRepeat(lastNum){
- 		for (var i = 0; i < guess.length-1; i++){
- 			if (lastNum === guess[i]) return true;
- 		}
- 		return false;
- 	};
-
-
- $('#submit').on("click", function(){
- 	var userInput = $('input:text').val();
- 	play(userInput);
- });
-
- $('#gimme').on("click", function(){
- 	feedback.text(answer);
- });
-
- $('#again').on("click", function(){
- 	$('input:text').val('');
- 	feedback.text("Have another go!");
- 	count = 1;
- 	turn.text('');
- 	guess = [];
- });
   
+  var round = new GuessingGame();
+
+  $('#submit').on("click", function(){
+    var userInput = $('input:text').val();
+ 	round.play(userInput);
+  });
+
+  $('#gimme').on("click", function(){
+    feedback.text(round.answer);
+  });
+
+  $('#again').on("click", function(){
+  	$('input:text').val('');
+  	turn.text('');
+ 	feedback.text("Have another go!");
+ 	round = new GuessingGame();
+  });
+
 });
- 
- // for testing purposes
 
-//  function GuessingGame() { 
-// var answer = Math.round(Math.random() * 100);
-//  	var guess = [];
-//  	var count = 0;
+function GuessingGame() {
 
-//  	this.play = function (){ // this will be an onclick event
-//  		if (count === 5) return "Game over. You lose";
-//  		guess.push(parseInt(prompt('Enter a number')));
-//  		var lastNum = guess[guess.length-1];
-//  		if (isRepeat(lastNum)) {
-//  			alert("DRY");
-//  			this.play();
-//  		} else {
-//  			this.compare(lastNum);
-//  		}
-//  	};
+  var count = 1;
+  var guess = [];
 
-//  	this.compare = function (lastNum){
-//  		count++;
-//  		if (lastNum === answer) return console.log("Congrats, you fucking won!!");
-//  		if (lastNum < answer) alert(this.difference(lastNum, answer) + ", guess higher");
-//  		if (lastNum > answer) alert(this.difference(lastNum, answer) + ", guess lower");
-//  		this.play();
-//  	};
+  this.answer = Math.round(Math.random() * 100);	
 
-//  	this.difference = function (lastNum, answer){
-//  		if (Math.abs(answer - lastNum) <= 5) return "You are ghost pepper hot";
-//  		if (Math.abs(answer - lastNum) <= 10) return "You are a habanero pepper";
-//  		if (Math.abs(answer - lastNum) <= 20) return "You are a Jalapeno pepper";
-//  		if (Math.abs(answer - lastNum) <= 30) return "You are a peperoncini";
-//  		else return "You are a green bell pepper";
-//  	};
+  this.output = {
+    ghostPepper: "You are a ghost pepper, deathly HOT",
+    habanero: "You are a habanero pepper, on the verge of tears",
+    jalapeno: "You are a Jalapeno pepper, very spicy but tolerable",
+    peperoncini: "You are a peperoncini, a small kick",
+    bellPepper: "You are as cold and mild as a green bell pepper",
+    gameOver: "Game over. You lose",
+    noRepeats: "DRY Bitch DRY",
+    won: "Congrats, you fucking won!!"
+  };
 
-//  	function isRepeat(lastNum){
-//  		for (var i = 0; i < guess.length-1; i++){
-//  			if (lastNum === guess[i]) return true;
-//  		}
-//  		return false;
-//  	}
-// }
+  this.play = function(userInput){ 
+    // pushes user input into an array
+    guess.push(parseInt(userInput));
+    // sets the last value of the array as the number to compare to answer
+    var lastNum = guess[guess.length-1];
+    if (this.isRepeat(lastNum)) {
+      feedback.text(output.noRepeats);
+ 	  count = count;
+ 	  $('input:text').val('');
+    } else {
+   	  this.compare(lastNum);
+    }
+    if (count > 5) return feedback.text(this.output.gameOver);
+  };
 
-// var round1 = new GuessingGame();
-// round1.play();
+  this.compare = function(lastNum){
+    if (lastNum === this.answer) return feedback.text(this.output.won);
+    turn.text(count++);
+    if (lastNum < this.answer) {
+ 	  var higher = this.difference(lastNum, this.answer) + ", guess higher"; 
+ 	  feedback.text(higher);
+    }
+    if (lastNum > this.answer) {
+ 	  var lower = this.difference(lastNum, this.answer) + ", guess lower";
+ 	  feedback.text(lower);
+    }
+    $('input:text').val('');
+  };
 
+  this.difference = function(lastNum, answer){
+    if (Math.abs(answer - lastNum) <= 5) return this.output.ghostPepper;
+    if (Math.abs(answer - lastNum) <= 10) return this.output.habanero;
+    if (Math.abs(answer - lastNum) <= 15) return this.output.jalapeno;
+    if (Math.abs(answer - lastNum) <= 20) return this.output.peperoncini;
+    else return this.output.bellPepper;
+  };
 
-//  	var answer = Math.round(Math.random() * 100);
-//  	var guess = [];
-//  	var count = 0;
-
-//  	function play(){ // this will be an onclick event
-//  		if (count === 5) return "Game over. You lose";
-//  		guess.push(parseInt(prompt('Enter a number')));
-//  		var lastNum = guess[guess.length-1];
-//  		if (isRepeat(lastNum)) {
-//  			alert("DRY");
-//  			play();
-//  		} else {
-//  			compare(lastNum);
-//  		}
-//  	}
-
-//  	function compare(lastNum){
-//  		count++;
-//  		if (lastNum === answer) return console.log("Congrats, you fucking won!!");
-//  		if (lastNum < answer) alert(difference(lastNum, answer) + ", guess higher");
-//  		if (lastNum > answer) alert(difference(lastNum, answer) + ", guess lower");
-//  		play();
-//  	}
-
-//  	function difference(lastNum, answer){
-//  		if (Math.abs(answer - lastNum) <= 5) return "You are ghost pepper hot";
-//  		if (Math.abs(answer - lastNum) <= 10) return "You are a habanero pepper";
-//  		if (Math.abs(answer - lastNum) <= 20) return "You are a Jalapeno pepper";
-//  		if (Math.abs(answer - lastNum) <= 30) return "You are a peperoncini";
-//  		else return "You are a green bell pepper";
-//  	}
-
-//  	function isRepeat(lastNum){
-//  		for (var i = 0; i < guess.length-1; i++){
-//  			if (lastNum === guess[i]) return true;
-//  		}
-//  		return false;
-//  	}
-
-
-
-// play();
-
-
+  this.isRepeat = function(lastNum){
+    for (var i = 0; i < guess.length-1; i++){
+ 	  if (lastNum === guess[i]) return true;
+    }
+    return false;
+  };
+}
