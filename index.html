@@ -1,0 +1,79 @@
+<!-- 1. 2 ~ 4 buttons
+	 2. 1 input field
+	 3. a unique design -->
+<!-- This is a web game based on the Scoville scale of spicy peppers http://en.wikipedia.org/wiki/Scoville_scale-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="gg.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <title>Guessing Game</title>
+  </head>
+  <body>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-8 col-lg-offset-2">
+        <h1>Guessing Game</h1>
+        <p>Guess correctly and win a lifetime supply of habanero peppers. You have 5 attempts.</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-sm-6 col-sm-offset-3">
+        <input type="text" placeholder="Enter guess">
+        <button type="button" id="submit">Submit</button>
+        <button type="button" id="gimme">Gimme answer</button>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="feedback"><p class="feedback"></p></div>
+        <div class="count"><p id="count"></p></div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <button type="button" id="again">Play again</button>
+    </div>
+  </div>
+ <!--  <div class="pull"> -->
+ <div class="show">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name of Pepper</th>
+          <th>Scale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ghost Pepper</td>
+          <td>off by 5</td>
+        </tr>
+        <tr>
+          <td>Habanero Pepper</td>
+          <td>off by 10</td>
+        </tr>
+        <tr>
+          <td>Jalapeno Pepper</td>
+          <td>off by 15</td>
+        </tr>
+        <tr>
+          <td>Pepperoncini</td>
+          <td>off by 20</td>
+        </tr>
+        <tr>
+          <td>Green Bell Pepper</td>
+          <td>off by a lot</td>
+        </tr>
+      </tbody>
+    </table>
+<!--   </div> -->
+  </div>
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <script src="gg.js"></script>
+  </body>
+</html>
+
