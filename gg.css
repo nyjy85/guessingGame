@@ -1,0 +1,40 @@
+input {
+	height: 60px;
+	width: 150px;
+}
+
+input[type="text"]{
+	font-size: 24px;
+	text-align: center;
+}
+
+.show{
+	height: 200px;
+	width: 20px;
+	background:#cc0000;
+	position: fixed;
+   	right: 0;
+   	cursor: pointer;
+   	border-bottom-left-radius:5px;
+    border-top-left-radius:5px;
+}
+
+.pull{
+	right: 0;
+	width: 30%;
+	height: 220px;
+	background: #E67E22;
+}
+table.table{
+	width: 100%;
+	right: 0;
+	position: relative;
+	display: none;
+	
+}
+
+
+
+
+
+
