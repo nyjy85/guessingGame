@@ -1,5 +1,4 @@
-var feedback = $('p.feedback');
-var turn = $('p#count');
+var feedback = $('p.feedback'), turn = $('p#count');
 
 $(document).ready(function() { 
   
@@ -7,7 +6,7 @@ $(document).ready(function() {
 
   $('#submit').on("click", function(){
     var userInput = $('input:text').val();
- 	round.play(userInput);
+ 	  round.play(userInput);
   });
 
   $('#gimme').on("click", function(){
@@ -17,16 +16,20 @@ $(document).ready(function() {
   $('#again').on("click", function(){
   	$('input:text').val('');
   	turn.text('');
- 	feedback.text("Have another go!");
- 	round = new GuessingGame();
+ 	  feedback.text("Have another go!");
+ 	  round = new GuessingGame();
+  });
+
+  $('.show').on("click", function(){
+       $(this).toggleClass('pull', 1500);
+       $('.table').slideToggle('slow');
   });
 
 });
 
 function GuessingGame() {
 
-  var count = 1;
-  var guess = [];
+  var count = 1, guess = [];
 
   this.answer = Math.round(Math.random() * 100);	
 
@@ -37,7 +40,7 @@ function GuessingGame() {
     peperoncini: "You are a peperoncini, a small kick",
     bellPepper: "You are as cold and mild as a green bell pepper",
     gameOver: "Game over. You lose",
-    noRepeats: "DRY Bitch DRY",
+    noRepeats: "Don't Repeat Yoself",
     won: "Congrats, you fucking won!!"
   };
 
@@ -80,7 +83,7 @@ function GuessingGame() {
 
   this.isRepeat = function(lastNum){
     for (var i = 0; i < guess.length-1; i++){
- 	  if (lastNum === guess[i]) return true;
+ 	    if (lastNum === guess[i]) return true;
     }
     return false;
   };
