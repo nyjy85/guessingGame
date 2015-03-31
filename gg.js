@@ -55,7 +55,7 @@ function GuessingGame() {
     // sets the last value of the array as the number to compare to answer
     var lastNum = guess[guess.length-1];
     if (this.isRepeat(lastNum)) {
-      feedback.text(output.noRepeats);
+      feedback.text(this.output.noRepeats);
  	  count = count;
  	  $('input:text').val('');
     } else {
