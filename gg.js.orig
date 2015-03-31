@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6a1a2beb49d1705cad2af59b83c973e441c8b630
 var feedback = $('p.feedback'), turn = $('p#count');
 
 $(document).ready(function() { 
@@ -30,7 +33,15 @@ $(document).ready(function() {
 
 function GuessingGame() {
 
+<<<<<<< HEAD
   var count = 1, guess = [];
+
+=======
+
+  var count = 1, guess = [];
+
+
+>>>>>>> 6a1a2beb49d1705cad2af59b83c973e441c8b630
   this.answer = Math.round(Math.random() * 100);	
 
   this.output = {
@@ -40,8 +51,13 @@ function GuessingGame() {
     peperoncini: "You are a peperoncini, a small kick",
     bellPepper: "You are as cold and mild as a green bell pepper",
     gameOver: "Game over. You lose",
+<<<<<<< HEAD
+    noRepeats: "Don't Repeat Yoself",
+=======
 
     noRepeats: "Don't Repeat Yoself",
+
+>>>>>>> 6a1a2beb49d1705cad2af59b83c973e441c8b630
     won: "Congrats, you fucking won!!"
   };
 
@@ -51,9 +67,13 @@ function GuessingGame() {
     // sets the last value of the array as the number to compare to answer
     var lastNum = guess[guess.length-1];
     if (this.isRepeat(lastNum)) {
+<<<<<<< HEAD
+      feedback.text(output.noRepeats);
+=======
       feedback.text(this.output.noRepeats);
- 	    count = count;
- 	    $('input:text').val('');
+>>>>>>> 6a1a2beb49d1705cad2af59b83c973e441c8b630
+ 	  count = count;
+ 	  $('input:text').val('');
     } else {
    	  this.compare(lastNum);
     }
@@ -85,6 +105,10 @@ function GuessingGame() {
   this.isRepeat = function(lastNum){
     for (var i = 0; i < guess.length-1; i++){
  	    if (lastNum === guess[i]) return true;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6a1a2beb49d1705cad2af59b83c973e441c8b630
     }
     return false;
   };
