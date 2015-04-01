@@ -84,7 +84,6 @@ GuessingGame.prototype.scale = function(diff){
   if (diff <= 20) return this.output.peperoncini;
   else return this.output.bellPepper;
 }
->>>>>>> master
 
 GuessingGame.prototype.isRepeat = function(lastNum){
   for (var i = 0; i < this.guess.length-1; i++){
