@@ -1,41 +1,13 @@
 
-var feedback = $('p.feedback'), turn = $('p#count');
-
-$(document).ready(function() { 
-  
-  var round = new GuessingGame();
-
-  $('#submit').on("click", function(){
-    var userInput = $('input:text').val();
- 	  round.play(userInput);
-  });
-
-  $('#gimme').on("click", function(){
-    feedback.text(round.getAnswer());
-  });
-
-  $('#again').on("click", function(){
-  	$('input:text').val('');
-  	turn.text('');
- 	  feedback.text("Have another go!");
- 	  round = new GuessingGame();
-  });
-
-  $('.show').on("click", function(){
-    $(this).toggleClass('pull', 1500);
-    $('.table').slideToggle('slow');
-  });
-
-});
 
 function GuessingGame() {
-  // set `count` to private var so users can't cheat
+  // set `count` and `answer` to private var so users can't cheat
   var count = 1;
   this.getCount = function(){return count};
   this.setCount = function(){count++};
   this.guess = [];
 
-  var answer = Math.round(Math.random() * 100);	//set to private variable
+  var answer = Math.round(Math.random() * 100);	
   this.getAnswer = function(){return answer};
 
   this.output = {
@@ -50,53 +22,60 @@ function GuessingGame() {
   };
 }
 
-GuessingGame.prototype.play = function(userInput){
-  this.guess.push(parseInt(userInput));
-  var lastNum = this.guess[this.guess.length-1];
-  if (this.isRepeat(lastNum)) this.tellThem(this.output.noRepeats);
-  else this.compare(lastNum);
-};
+//IIFE?
+(function protect(GG){
 
-GuessingGame.prototype.compare = function(lastNum){
-  if (lastNum === this.getAnswer()) return this.tellThem(this.output.won);
-  this.displayCount();
-  this.giveFeedback(lastNum);
-};
+  GG.play = function(userInput){
+    this.guess.push(userInput);
+    var lastNum = this.guess[this.guess.length-1];
+    if (this.isRepeat(lastNum)) this.tellThem(this.output.noRepeats);
+    else this.compare(lastNum);
+  };
 
-GuessingGame.prototype.giveFeedback = function(lastNum){
-  var higher = this.difference(lastNum) + ", guess higher"; 
-  var lower = this.difference(lastNum) + ", guess lower";
-  if (this.getCount() > 5) return this.tellThem(this.output.gameOver);
-  lastNum < this.getAnswer() ? this.tellThem(higher) : this.tellThem(lower);
-};
+  GG.compare = function(lastNum){
+    if (lastNum === this.getAnswer()) {
+      $overlay.show();
+      return this.tellThem(this.output.won);
+    }
+    this.displayCount();
+    this.giveFeedback(lastNum);
+  };
 
-GuessingGame.prototype.difference = function(lastNum){
-  var diff = Math.abs(this.getAnswer() - lastNum)
-  return this.scale(diff);
-};
+  GG.giveFeedback = function(lastNum){
+    var higher = this.difference(lastNum) + ", guess higher"; 
+    var lower = this.difference(lastNum) + ", guess lower";
+    if (this.getCount() > 5) return this.tellThem(this.output.gameOver);
+    lastNum < this.getAnswer() ? this.tellThem(higher) : this.tellThem(lower);
+  };
 
-GuessingGame.prototype.scale = function(diff){
-  if (diff <= 5) return this.output.ghostPepper; 
-  if (diff <= 10) return this.output.habanero;
-  if (diff <= 15) return this.output.jalapeno;
-  if (diff <= 20) return this.output.peperoncini;
-  else return this.output.bellPepper;
-}
+  GG.difference = function(lastNum){
+    var diff = Math.abs(this.getAnswer() - lastNum)
+    return this.scale(diff);
+  };
 
-GuessingGame.prototype.isRepeat = function(lastNum){
-  for (var i = 0; i < this.guess.length-1; i++){
-    if (lastNum === this.guess[i]) return true;
+  GG.scale = function(diff){
+    if (diff <= 5) return this.output.ghostPepper; 
+    if (diff <= 10) return this.output.habanero;
+    if (diff <= 15) return this.output.jalapeno;
+    if (diff <= 20) return this.output.peperoncini;
+    else return this.output.bellPepper;
   }
-  return false;
-};
 
-GuessingGame.prototype.displayCount = function(){
-  turn.text(this.getCount());  
-  this.setCount();
-};
+  GG.isRepeat = function(lastNum){
+    for (var i = 0; i < this.guess.length-1; i++){
+      if (lastNum === this.guess[i]) return true;
+    }
+    return false;
+  };
 
-GuessingGame.prototype.tellThem = function(output){
-  feedback.text(output);
-  $('input:text').val('');
-};
+  GG.displayCount = function(){
+    turn.text(this.getCount());  
+    this.setCount();
+  };
+
+  GG.tellThem = function(output){
+    feedback.text(output);
+    $('input:text').val('');
+  };
+})(GuessingGame.prototype);
 
