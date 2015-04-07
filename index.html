@@ -6,74 +6,70 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="gg.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <title>Guessing Game</title>
   </head>
   <body>
   <div class="container">
-    <div class="row text-center">
-      <div class="col-lg-8 col-lg-offset-2">
-        <h1>Guessing Game</h1>
+    <h1>Guessing Game<span id="creator"> by Joanne Yae</span></h1>
         <p>Guess correctly and win a lifetime supply of habanero peppers. You have 5 attempts.</p>
-      </div>
+          <div id="stem"></div>
+          <div id="pepper">
+            <div id="flatgreen">
+              <div class="green"></div>
+              <div class="green"></div>
+              <div class="green"></div> <div id="curve"></div>
+            </div>
+            
+            <input type="text" placeholder="Enter guess"> <br>
+            <button type="button" id="submit">Submit</button>
+            <button type="button" id="gimme">I give up</button>
+          </div>
+
+          <div class="feedback"><p class="feedback"></p></div>
+          <div class="count"><p id="count"></p></div>
+        <button type="button" id="again">Play again</button>
+
+   <div class="show">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name of Pepper</th>
+            <th>Scale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ghost Pepper</td>
+            <td>off by 5</td>
+          </tr>
+          <tr>
+            <td>Habanero Pepper</td>
+            <td>off by 10</td>
+          </tr>
+          <tr>
+            <td>Jalapeno Pepper</td>
+            <td>off by 15</td>
+          </tr>
+          <tr>
+            <td>Pepperoncini</td>
+            <td>off by 20</td>
+          </tr>
+          <tr>
+            <td>Green Bell Pepper</td>
+            <td>off by a lot</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="row text-center">
-      <div class="col-sm-6 col-sm-offset-3">
-        <input type="text" placeholder="Enter guess">
-        <button type="button" id="submit">Submit</button>
-        <button type="button" id="gimme">Gimme answer</button>
-      </div>
-    </div>
-    <div class="row text-center">
-      <div class="col-sm-6 col-sm-offset-3">
-        <div class="feedback"><p class="feedback"></p></div>
-        <div class="count"><p id="count"></p></div>
-      </div>
-    </div>
-    <div class="row text-center">
-      <button type="button" id="again">Play again</button>
-    </div>
-  </div>
- <!--  <div class="pull"> -->
- <div class="show">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name of Pepper</th>
-          <th>Scale</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Ghost Pepper</td>
-          <td>off by 5</td>
-        </tr>
-        <tr>
-          <td>Habanero Pepper</td>
-          <td>off by 10</td>
-        </tr>
-        <tr>
-          <td>Jalapeno Pepper</td>
-          <td>off by 15</td>
-        </tr>
-        <tr>
-          <td>Pepperoncini</td>
-          <td>off by 20</td>
-        </tr>
-        <tr>
-          <td>Green Bell Pepper</td>
-          <td>off by a lot</td>
-        </tr>
-      </tbody>
-    </table>
-<!--   </div> -->
   </div>
   <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
   <script src="gg.js"></script>
+  <script src="domJQ.js"></script>
   </body>
 </html>
 
