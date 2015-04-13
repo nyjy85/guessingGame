@@ -1,5 +1,3 @@
-
-
 function GuessingGame() {
   // set `count` and `answer` to private var so users can't cheat
   var count = 1;
@@ -19,7 +17,7 @@ function GuessingGame() {
     bellPepper: "You are as cold and mild as a green bell pepper",
     gameOver: "Game over. You lose",
     noRepeats: "Don't Repeat Yoself",
-    won: "Congrats, you fucking won!!"
+    won: "Congrats, you won!!"
   };
 }
 
@@ -62,7 +60,7 @@ function GuessingGame() {
     if (diff <= 15) return this.output.jalapeno;
     if (diff <= 20) return this.output.peperoncini;
     else return this.output.bellPepper;
-  }
+  } 
 
   GG.isRepeat = function(lastNum){
     for (var i = 0; i < this.guess.length-1; i++){

@@ -4,6 +4,7 @@ var $img = $('<img src="./habanero.jpg" />')
 var $overlay = $('<div id="overlay"></div>');
 var $winMessage = $('<p id="winmsg">Congrats you won Habanero peppers!</p>');
 
+// for the winning message
 $overlay.append($img).append($winMessage);
 $("body").append($overlay);
 
